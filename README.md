@@ -17,7 +17,7 @@ Respeite o território ou vai ter consequência.
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/Arturlupassa/blinders-bot.git
+   git clone https://github.com/Arturlupassa/Blinders-Bot.git
    cd blinders-bot
 
 2. Instale as dependências::
