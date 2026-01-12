@@ -19,3 +19,22 @@ Respeite o território ou vai ter consequência.
    ```bash
    git clone https://github.com/Arturlupassa/blinders-bot.git
    cd blinders-bot
+
+2. Instale as dependências::
+   ```bash
+   npm install
+
+3. Configure o dono/config.json (adicione seu número, prefixo, etc.):
+   ```bash
+   {
+   "prefix": "!",
+   "Dononame": "Artur Shelby",
+   "botName": "Blinders Bot",
+   "donoJid": "seu-numero@s.whatsapp.net",
+   ...
+   }
+
+
+4. Inicie o Bot:
+   ```bash
+    sh start
