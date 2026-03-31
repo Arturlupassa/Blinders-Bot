@@ -49,35 +49,81 @@ const { state, saveCreds } = await useMultiFileAuthState('./dono/blinders-qr')
 const msgRetryCounterCache = new NodeCache()
 
 const client = makeWASocket({
-version: [2, 3000, 1027934701],
-auth: state,
-logger: pino({ level: 'silent' }),
+
+version: [2, 3000, 1034862556],
+
+auth: {
+
+creds: state.creds,
+
+keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'silent' })),
+
+},
+
+logger: pino({ level: 'fatal' }),
+
 printQRInTerminal: false,
+
 mobile: false,
-browser: ['Chrome', 'Chrome', '111.0.5563.64'],
-generateHighQualityLinkPreview: true,
+
+browser: Browsers.ubuntu('Chrome'),
+
+generateHighQualityLinkPreview: false,
+
 msgRetryCounterCache,
+
 connectTimeoutMs: 60000,
-defaultQueryTimeoutMs: 0,
-keepAliveIntervalMs: 20000,
+
+defaultQueryTimeoutMs: 10000,
+
+keepAliveIntervalMs: 30000,
+
+markOnlineOnConnect: false,
+
+fireInitQueries: false,
+
+transactionOpts: {
+
+maxCommitRetries: 10,
+
+delayBetweenTriesMs: 3000
+
+},
+
 patchMessageBeforeSending: (message) => {
+
 const requiresPatch = !!(message.buttonsMessage || message.templateMessage || message.listMessage);
+
 if (requiresPatch) {
-message = {
+
+return {
+
 viewOnceMessage: {
+
 message: {
+
+...message,
+
 messageContextInfo: {
+
 deviceListMetadataVersion: 2,
+
 deviceListMetadata: {},
 },
-...message,
 },
 },
+
 };
+
 }
+
 return message;
+
 },
+
 });
+
+
 
 
 //======CONEXÃO POR CODE=========\\
